@@ -123,7 +123,7 @@ async function sendMessage(){
   const text = input.value.trim();
   if(!text || isLoading) return;
 
-  const apiKey = localStorage.getItem('traelo_api_key') || '';
+  const apiKey = localStorage.getItem('gcity_api_key') || '';
   if(!apiKey){ window.showApiModal(); window.showToast('⚠️ Activa el agente primero'); return; }
 
   addMessage('user', text);
@@ -159,7 +159,7 @@ async function sendMessage(){
 
     const payload = {
       query: text,
-      trm: window.TraeloConfig.TRM,
+      trm: window.GCityConfig.TRM,
       productos: amazonProds.map((p, idx) => ({
         idx,
         nombre: p.nombre,
@@ -176,7 +176,7 @@ async function sendMessage(){
       }))
     };
 
-    const SYS = `Eres el Agente Cazador de Traelo, experto en ayudar a colombianos a decidir si les conviene importar un producto desde USA. Recibes productos REALES de Amazon ya con precios calculados (puestos en Colombia, incluyendo flete, arancel y fee). No calculas nada. Solo analizas y recomiendas.
+    const SYS = `Eres el Agente Cazador de G-CITY, experto en ayudar a colombianos a decidir si les conviene importar un producto desde USA. Recibes productos REALES de Amazon ya con precios calculados (puestos en Colombia, incluyendo flete, arancel y fee). No calculas nada. Solo analizas y recomiendas.
 
 Tu trabajo:
 1. Elige los 3 productos más interesantes del listado (mejor relación calidad-precio, rating, ahorro, popularidad).
@@ -195,7 +195,7 @@ Máximo 3 items en seleccionados. Si ningún producto vale la pena, manda selecc
 
     let claudeJson = null;
     try {
-      const r = await fetch(window.TraeloConfig.API_URL, {
+      const r = await fetch(window.GCityConfig.API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ Máximo 3 items en seleccionados. Si ningún producto vale la pena, manda selecc
           'anthropic-dangerous-direct-browser-access': 'true'
         },
         body: JSON.stringify({
-          model: window.TraeloConfig.MODEL,
+          model: window.GCityConfig.MODEL,
           max_tokens: 1000,
           system: SYS,
           messages: [{ role: 'user', content: JSON.stringify(payload) }]

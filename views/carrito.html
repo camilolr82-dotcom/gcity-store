@@ -1,0 +1,24 @@
+<div class="view" id="view-carrito">
+  <div class="carrito-view">
+    <h2 class="carrito-title">Mi Carrito</h2>
+    <div class="carrito-items" id="carrito-items">
+      <div class="carrito-empty">
+        <div style="font-size:48px;margin-bottom:12px">🛒</div>
+        <div>Tu carrito está vacío</div>
+        <button class="carrito-browse-btn" onclick="switchTab('tienda')">
+          Ver productos
+        </button>
+      </div>
+    </div>
+    <div class="carrito-footer" id="carrito-footer" style="display:none">
+      <div class="carrito-total">
+        <span>Total:</span>
+        <span id="carrito-total-valor">$0</span>
+      </div>
+      <button class="carrito-checkout-btn" id="checkout-btn"
+              onclick="GCityCarrito.checkout()">
+        Ir a pagar
+      </button>
+    </div>
+  </div>
+</div>

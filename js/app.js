@@ -1,4 +1,4 @@
-const VIEWS = ['home', 'calc', 'pedidos', 'cuenta'];
+const VIEWS = ['tienda', 'producto', 'carrito', 'cuenta', 'admin'];
 
 async function loadViews(){
   const main = document.querySelector('.main');
@@ -13,19 +13,45 @@ async function loadViews(){
 
 async function fetchTRM(){
   try {
-    const res = await fetch(window.TraeloConfig.TRM_URL);
+    const res = await fetch(window.GCityConfig.TRM_URL);
     if(!res.ok) return;
     const data = await res.json();
     const valor = parseFloat(data?.[0]?.valor);
     if(valor > 3000 && valor < 6000){
-      window.TraeloConfig.TRM = valor;
+      window.GCityConfig.TRM = valor;
       console.log('TRM actualizada:', valor);
       const el = document.getElementById('trm-display');
       if(el) el.textContent = '$' + Math.round(valor).toLocaleString('es-CO') + ' COP / USD';
     }
   } catch (e) {
-    console.warn('TRM fetch fallido, usando fallback:', window.TraeloConfig.TRM);
+    console.warn('TRM fetch fallido, usando fallback:', window.GCityConfig.TRM);
   }
+}
+
+function refreshIcons(){
+  if(window.lucide && typeof window.lucide.createIcons === 'function'){
+    window.lucide.createIcons();
+  }
+}
+
+function wireAuth(){
+  const supa = window.GCity && window.GCity.supabase;
+  if(!supa || typeof supa.onAuthChange !== 'function') return;
+  supa.onAuthChange(async (event, session) => {
+    const userId = session?.user?.id;
+    const adminTab = document.getElementById('nav-admin');
+    if(!adminTab) return;
+    if(!userId){
+      adminTab.style.display = 'none';
+      return;
+    }
+    try {
+      const profile = await supa.getProfile(userId);
+      adminTab.style.display = (profile && profile.role === 'admin') ? 'flex' : 'none';
+    } catch (_){
+      adminTab.style.display = 'none';
+    }
+  });
 }
 
 async function init(){
@@ -46,19 +72,29 @@ async function init(){
 
   await fetchTRM();
 
-  window.initUI();
+  if(typeof window.initUI === 'function') window.initUI();
 
-  if(window.Home && typeof window.Home.init === 'function'){
-    window.Home.init();
+  if(window.GCityTienda && typeof window.GCityTienda.init === 'function'){
+    window.GCityTienda.init();
+  }
+  if(window.GCityCarrito && typeof window.GCityCarrito.init === 'function'){
+    window.GCityCarrito.init();
   }
 
-  if(window.lucide && typeof window.lucide.createIcons === 'function'){
-    window.lucide.createIcons();
+  wireAuth();
+  refreshIcons();
+
+  // Hook switchTab to refresh icons on every tab change
+  const originalSwitchTab = window.switchTab;
+  if(typeof originalSwitchTab === 'function'){
+    window.switchTab = function(t){
+      originalSwitchTab(t);
+      refreshIcons();
+    };
   }
 
-  const apiKey = localStorage.getItem('traelo_api_key') || '';
+  const apiKey = localStorage.getItem('gcity_api_key') || '';
   if(apiKey) window.showToast('✅ Listo para buscar');
-  else setTimeout(() => window.showToast('🔑 Activa tus claves API en "Yo"'), 1200);
 }
 
 window.addEventListener('DOMContentLoaded', init);

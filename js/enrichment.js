@@ -59,8 +59,8 @@ function calcularPrecioColombia(producto){
   const arancel_pct = getArancel(categoria);
   const arancel_usd = precio_usd * arancel_pct;
   const total_usd = precio_usd + flete_usd + arancel_usd;
-  const trm = (window.TraeloConfig && window.TraeloConfig.TRM) || 4100;
-  const fee_cop = (window.TraeloConfig && window.TraeloConfig.FEE) || 35000;
+  const trm = (window.GCityConfig && window.GCityConfig.TRM) || 4100;
+  const fee_cop = (window.GCityConfig && window.GCityConfig.FEE) || 35000;
   const total_cop = Math.round(total_usd * trm) + fee_cop;
 
   return {

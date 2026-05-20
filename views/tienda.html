@@ -1,0 +1,21 @@
+<div class="view active" id="view-tienda">
+  <div class="tienda-view">
+    <div class="tienda-search">
+      <input type="text" id="tienda-search-input"
+             placeholder="Buscar gadgets..."
+             autocomplete="off"/>
+      <button onclick="GCityTienda.buscar()">
+        <i data-lucide="search"></i>
+      </button>
+    </div>
+    <div class="tienda-categorias" id="tienda-categorias">
+      <!-- Chips de categorías se renderizan desde JS -->
+    </div>
+    <div class="tienda-productos" id="tienda-productos">
+      <div class="tienda-empty">
+        <div style="font-size:48px;margin-bottom:12px">🏪</div>
+        <div>Cargando productos...</div>
+      </div>
+    </div>
+  </div>
+</div>

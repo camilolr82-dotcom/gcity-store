@@ -83,7 +83,7 @@ const Home = {
   },
 
   async _razonarConClaude(query, productos){
-    const apiKey = localStorage.getItem('traelo_api_key') || '';
+    const apiKey = localStorage.getItem('gcity_api_key') || '';
     if(!apiKey) return productos;
 
     const payload = {
@@ -98,13 +98,13 @@ const Home = {
       }))
     };
 
-    const SYS = `Eres el curador de Traelo. Recibes 4 productos ya filtrados de Amazon. Para cada uno, escribe UNA frase (max 70 caracteres) explicando por qué está bien o mal. Devuelve JSON array: [{"idx":0,"razon":"..."},...]. No agregues backticks ni texto adicional.`;
+    const SYS = `Eres el curador de G-CITY. Recibes 4 productos ya filtrados de Amazon. Para cada uno, escribe UNA frase (max 70 caracteres) explicando por qué está bien o mal. Devuelve JSON array: [{"idx":0,"razon":"..."},...]. No agregues backticks ni texto adicional.`;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 6000);
 
     try {
-      const r = await fetch(window.TraeloConfig.API_URL, {
+      const r = await fetch(window.GCityConfig.API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const Home = {
           'anthropic-dangerous-direct-browser-access': 'true'
         },
         body: JSON.stringify({
-          model: window.TraeloConfig.MODEL,
+          model: window.GCityConfig.MODEL,
           max_tokens: 400,
           system: SYS,
           messages: [{ role: 'user', content: JSON.stringify(payload) }]

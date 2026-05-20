@@ -1,0 +1,6 @@
+/* G-CITY Producto detail styles — Milestone 2 */
+.producto-view { padding: 16px; }
+.producto-back {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 16px; cursor: pointer; opacity: 0.7;
+}

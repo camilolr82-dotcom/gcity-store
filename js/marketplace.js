@@ -14,10 +14,10 @@ function extraerJSON(texto){
 }
 
 async function buscarAmazon(query, limit = 5){
-  const key = localStorage.getItem('traelo_rapidapi_key');
+  const key = localStorage.getItem('gcity_rapidapi_key');
   if(!key) throw new Error('sin_key');
 
-  const host = window.TraeloConfig.RAPIDAPI_AMAZON_HOST;
+  const host = window.GCityConfig.RAPIDAPI_AMAZON_HOST;
   const url = `https://${host}/search?query=${encodeURIComponent(query)}&country=US&page=1`;
 
   let res;
@@ -74,13 +74,13 @@ async function buscarML(query, limit = 5){
     return [];
   };
 
-  const apiKey = localStorage.getItem('traelo_api_key');
+  const apiKey = localStorage.getItem('gcity_api_key');
   if(!apiKey){
     console.warn('buscarML best-effort fallback:', 'sin_key');
     return cacheEmpty();
   }
 
-  const { API_URL, MODEL } = window.TraeloConfig;
+  const { API_URL, MODEL } = window.GCityConfig;
 
   const SYS = `Busca productos en mercadolibre.com.co usando web_search. Haz UNA sola búsqueda. No hagas múltiples queries. Usa solo los snippets de resultados, no navegues páginas completas.
 

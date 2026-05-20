@@ -23,34 +23,34 @@ function showToast(msg){
 
 function showApiModal(){
   document.getElementById('api-modal').classList.add('show');
-  const saved = localStorage.getItem('traelo_api_key') || '';
+  const saved = localStorage.getItem('gcity_api_key') || '';
   if(saved) document.getElementById('api-key-input').value = saved;
 }
 
 function saveApiKey(){
   const v = document.getElementById('api-key-input').value.trim();
   if(!v.startsWith('sk-ant')){ showToast('❌ Clave inválida'); return; }
-  localStorage.setItem('traelo_api_key', v);
+  localStorage.setItem('gcity_api_key', v);
   document.getElementById('api-modal').classList.remove('show');
   showToast('✅ Agente activado');
 }
 
 function copyAddress(){
-  navigator.clipboard.writeText(window.TraeloConfig.DIRECCION_CASILLERO)
+  navigator.clipboard.writeText(window.GCityConfig.DIRECCION_CASILLERO)
     .then(() => showToast('✅ Dirección copiada'))
     .catch(() => showToast('Copia manualmente'));
 }
 
 function showRapidApiModal(){
   document.getElementById('rapidapi-modal').classList.add('show');
-  const saved = localStorage.getItem('traelo_rapidapi_key') || '';
+  const saved = localStorage.getItem('gcity_rapidapi_key') || '';
   if(saved) document.getElementById('rapidapi-key-input').value = saved;
 }
 
 function saveRapidApiKey(){
   const v = document.getElementById('rapidapi-key-input').value.trim();
   if(!v){ showToast('❌ Clave vacía'); return; }
-  localStorage.setItem('traelo_rapidapi_key', v);
+  localStorage.setItem('gcity_rapidapi_key', v);
   document.getElementById('rapidapi-modal').classList.remove('show');
   showToast('✅ APIs de marketplace activadas');
 }
