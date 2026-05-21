@@ -1,23 +1,163 @@
-/* G-CITY Carrito styles — Milestone 2 */
-.carrito-view { padding: 16px; }
-.carrito-title { margin-bottom: 16px; }
-.carrito-empty { text-align: center; padding: 60px 20px; opacity: 0.7; }
+/* === G-CITY Carrito === */
+
+.carrito-view {
+  padding: 16px;
+  padding-bottom: 160px;
+}
+
+.carrito-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+
+.carrito-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
 .carrito-browse-btn {
-  margin-top: 16px; padding: 12px 24px; border-radius: 12px;
-  border: none; background: var(--accent); color: var(--bg);
-  font-size: 15px; cursor: pointer;
+  margin-top: 16px;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
 }
+
+/* Cart items */
+.carrito-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+.carrito-item-img {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.carrito-item-info { flex: 1; min-width: 0; }
+
+.carrito-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carrito-item-price {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.carrito-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carrito-item-controls button {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration) var(--ease);
+}
+.carrito-item-controls button:active {
+  background: var(--surface3);
+  transform: scale(0.92);
+}
+
+.carrito-item-controls span {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 24px;
+  text-align: center;
+}
+
+.carrito-item-remove {
+  margin-left: auto;
+  border-color: var(--error-dim) !important;
+  color: var(--error) !important;
+}
+.carrito-item-remove:active {
+  background: var(--error-dim) !important;
+}
+
+/* Footer fijo: total + checkout */
 .carrito-footer {
-  position: fixed; bottom: 70px; left: 0; right: 0;
-  padding: 16px; background: var(--bg);
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: var(--bg);
   border-top: 1px solid var(--border);
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  z-index: 50;
 }
+
 .carrito-total {
-  display: flex; justify-content: space-between;
-  font-size: 18px; font-weight: 700; margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
+
+.carrito-total span:last-child {
+  font-family: 'Space Mono', monospace;
+  color: var(--accent);
+}
+
 .carrito-checkout-btn {
-  width: 100%; padding: 14px; border-radius: 12px; border: none;
-  background: var(--accent); color: var(--bg); font-size: 16px;
-  font-weight: 600; cursor: pointer;
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
 }
+.carrito-checkout-btn:hover { background: var(--accent-hover); }
+.carrito-checkout-btn:active { transform: scale(0.98); }

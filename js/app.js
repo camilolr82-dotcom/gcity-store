@@ -84,12 +84,18 @@ async function init(){
   wireAuth();
   refreshIcons();
 
-  // Hook switchTab to refresh icons on every tab change
+  // Hook switchTab to refresh icons + lazy-init admin on demand
   const originalSwitchTab = window.switchTab;
   if(typeof originalSwitchTab === 'function'){
     window.switchTab = function(t){
       originalSwitchTab(t);
       refreshIcons();
+      if(t === 'admin' && window.GCityAdmin && typeof window.GCityAdmin.init === 'function'){
+        window.GCityAdmin.init();
+      }
+      if(t === 'carrito' && window.GCityCarrito && typeof window.GCityCarrito.render === 'function'){
+        window.GCityCarrito.render();
+      }
     };
   }
 
