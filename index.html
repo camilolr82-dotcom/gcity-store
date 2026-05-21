@@ -3,12 +3,21 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<meta name="theme-color" content="#0A0A0A"/>
+<meta name="theme-color" content="#0A0E14"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="description" content="G-CITY — Gadgets y accesorios tecnológicos. Envíos a Colombia, México y USA."/>
 <title>G-CITY — Gadgets & Accesorios</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png"/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 
 <link rel="stylesheet" href="css/base.css"/>
 <link rel="stylesheet" href="css/layout.css"/>
@@ -24,11 +33,21 @@
 <header class="header">
   <div class="header-top">
     <div class="logo-area">
-      <div class="logo-mark">G</div>
+      <div class="logo-mark">
+        <img src="assets/logo-gcity.jpg" alt="G-CITY" class="logo-img"/>
+      </div>
       <div class="logo-name">G-<span>CITY</span></div>
     </div>
     <div class="header-actions">
-      <div class="icon-btn" onclick="showToast('🔔 Sin notificaciones nuevas')"><i data-lucide="bell"></i></div>
+      <button class="icon-btn" id="header-search-toggle"
+              onclick="GCityTienda.toggleSearch()">
+        <i data-lucide="search"></i>
+      </button>
+      <button class="icon-btn" onclick="switchTab('carrito')">
+        <i data-lucide="shopping-bag"></i>
+        <span class="cart-badge-header" id="cart-badge-header"
+              style="display:none">0</span>
+      </button>
     </div>
   </div>
 </header>

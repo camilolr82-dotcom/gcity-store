@@ -1,21 +1,94 @@
 <div class="view active" id="view-tienda">
   <div class="tienda-view">
-    <div class="tienda-search">
-      <input type="text" id="tienda-search-input"
-             placeholder="Buscar gadgets..."
-             autocomplete="off"/>
-      <button onclick="GCityTienda.buscar()">
-        <i data-lucide="search"></i>
-      </button>
-    </div>
-    <div class="tienda-categorias" id="tienda-categorias">
-      <!-- Chips de categorías se renderizan desde JS -->
-    </div>
-    <div class="tienda-productos" id="tienda-productos">
-      <div class="tienda-empty">
-        <div style="font-size:48px;margin-bottom:12px">🏪</div>
-        <div>Cargando productos...</div>
+
+    <!-- Marquee de categorías -->
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+        <span class="marquee-item">CABLES 100W</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">MAGSAFE</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">ESTUCHES PREMIUM</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">CARGADORES GAN</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">AUDIO ANC</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">POWERBANK SOLAR</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">MICRO SD 256GB</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">BAFLES IPX7</span>
+        <span class="marquee-dot">•</span>
+        <!-- Duplicado para loop continuo -->
+        <span class="marquee-item">CABLES 100W</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">MAGSAFE</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">ESTUCHES PREMIUM</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">CARGADORES GAN</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">AUDIO ANC</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">POWERBANK SOLAR</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">MICRO SD 256GB</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">BAFLES IPX7</span>
+        <span class="marquee-dot">•</span>
       </div>
     </div>
+
+    <!-- Hero -->
+    <div class="tienda-hero">
+      <div class="tienda-hero-tagline">
+        Everything your device needs
+      </div>
+      <h1 class="tienda-hero-title">ALL GADGETS</h1>
+      <p class="tienda-hero-sub">
+        Envíos a Colombia, México & USA
+      </p>
+    </div>
+
+    <!-- Buscador (colapsable, se activa con icono del header) -->
+    <div class="tienda-search" id="tienda-search-bar" style="display:none">
+      <div class="tienda-search-inner">
+        <i data-lucide="search" style="width:18px;height:18px;color:var(--text-muted)"></i>
+        <input type="text" id="tienda-search-input"
+               placeholder="¿Qué estás buscando?"
+               autocomplete="off"/>
+      </div>
+    </div>
+
+    <!-- Categorías como chips -->
+    <div class="tienda-categorias" id="tienda-categorias">
+      <button class="cat-chip active" data-cat="todo"
+              onclick="GCityTienda.filtrar('todo', this)">Todo</button>
+      <button class="cat-chip" data-cat="audio"
+              onclick="GCityTienda.filtrar('audio', this)">🎧 Audio</button>
+      <button class="cat-chip" data-cat="cargadores"
+              onclick="GCityTienda.filtrar('cargadores', this)">⚡ Cargadores</button>
+      <button class="cat-chip" data-cat="cases"
+              onclick="GCityTienda.filtrar('cases', this)">📱 Cases</button>
+      <button class="cat-chip" data-cat="gaming"
+              onclick="GCityTienda.filtrar('gaming', this)">🎮 Gaming</button>
+      <button class="cat-chip" data-cat="smart"
+              onclick="GCityTienda.filtrar('smart', this)">💡 Smart Home</button>
+      <button class="cat-chip" data-cat="accesorios"
+              onclick="GCityTienda.filtrar('accesorios', this)">🔌 Accesorios</button>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="tienda-productos" id="tienda-productos">
+      <div class="tienda-empty">
+        <div class="tienda-empty-icon">⚡</div>
+        <div class="tienda-empty-title">Próximamente</div>
+        <div class="tienda-empty-sub">
+          Estamos cargando el catálogo. Muy pronto verás los productos aquí.
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
